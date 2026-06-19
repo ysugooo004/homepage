@@ -771,6 +771,7 @@ button {
   content: "";
   flex-grow: 1;
   max-width: 3rem;
+  height: 1px; /* 線の太さ */
   background-color: #C5B7AA;
 }
 @media screen and (min-width: 768px) {
