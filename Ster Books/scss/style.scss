@@ -1,0 +1,20 @@
+// Live Sass Compilerを使用
+// 設定で/css/style.cssにコンパイルされるように
+// base
+@use "base/reset";
+@use "base/global";
+
+// function（変数）
+@use "function/variables" as *;
+
+// mixins
+@use "mixins/mixins" as *;
+
+// components（個別に読み込む）
+@use "components/MainHeader";
+@use "components/MainFooter";
+@use "components/SectionInner";
+@use "components/SectionTitle";
+
+// pages
+@use "pages/top";

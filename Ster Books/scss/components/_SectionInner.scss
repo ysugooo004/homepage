@@ -1,0 +1,13 @@
+@use "../mixins/mixins" as *;
+@use "../function/variables" as *;
+.section-inner {
+  max-width: 34.5rem;
+  width: 100%;
+  padding-block: 5rem;
+  margin-inline: auto;
+  @include media(md) {
+    max-width: 96rem;
+    width: 100%;
+    padding-block: 6rem;
+  }
+}

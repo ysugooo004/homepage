@@ -1,0 +1,165 @@
+@use "../mixins/mixins" as *;
+@use "../function/variables" as *;
+/* archivo-narrow-regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: "Archivo Narrow";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/archivo-narrow-v35-latin-regular.woff2") format("woff2");
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+
+// ==========================================
+// フォント単体の定義
+// ==========================================
+$font-en: "Archivo Narrow", sans-serif;
+$font-ja: "Zen Kaku Gothic New", sans-serif;
+$font-noto-sans: "Noto Sans JP", sans-serif; // ★Noto Sans JPを追加
+
+// ==========================================
+// 組み合わせフォント（セット）の定義
+// ==========================================
+// サイト全体のメインゴシック用（必要に応じて使用）
+$font-main:
+  #{$font-en},
+  #{$font-ja};
+
+// ★ヘッダーとフッター専用のフォントセット
+// 英数字には Archivo Narrow を、日本語には Noto Sans JP を適用します
+$font-header-footer:
+  #{$font-en},
+  $font-noto-sans;
+
+html {
+  font-size: calc(10 / 375 * 100vw);
+  // scroll-behavior: smooth;
+  @include media(md) {
+    font-size: 62.5%;
+  }
+}
+
+// ==========================================
+// スタイルの適用
+// ==========================================
+body {
+  // ★ヘッダーとフッター以外（サイト全体）のベースは Noto Serif JP（明朝体）
+  font-family: "Noto Serif JP", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: $color-font;
+  letter-spacing: 0;
+  background: $color-base;
+
+  &.u-noscroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    overflow: hidden;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+// ★ヘッダーとフッターだけ、先ほどの「ゴシック体（Noto Sans JP）セット」で上書き
+.header,
+.footer {
+  font-family: $font-header-footer;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+a {
+  display: block;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+.sp-only {
+  display: block;
+  @include media(md) {
+    display: none;
+  }
+}
+.u-tab-only {
+  display: none;
+  @include media(lg) {
+    display: block;
+  }
+}
+
+.pc-only {
+  display: none;
+  @include media(md) {
+    display: block;
+  }
+}
+
+.pc-only-inline {
+  display: none;
+  @include media(md) {
+    display: inline;
+  }
+}
+
+.sp-only-inline {
+  display: inline;
+  @include media(md) {
+    display: none;
+  }
+}
+
+.sp-only-flex {
+  display: flex;
+  @include media(md) {
+    display: none;
+  }
+}
+
+// アニメーションはグローバルに格納しても良い
+/* animation */
+/* スクロールアニメーション */
+.inview {
+  opacity: 0;
+  &.animate {
+    -webkit-animation: inview_slide_up 1.3s cubic-bezier(0.165, 0.84, 0.44, 1)
+      forwards 0.4s;
+    animation: inview_slide_up 1.3s cubic-bezier(0.165, 0.84, 0.44, 1) forwards
+      0.4s;
+  }
+}
+.inview_group .animate_item {
+  opacity: 0;
+  &.animate {
+    -webkit-animation: inview_slide_up 0.7s cubic-bezier(0.4, 0, 0.2, 1)
+      forwards 0.5s;
+    animation: inview_slide_up 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.5s;
+  }
+}
+@-webkit-keyframes inview_slide_up {
+  0% {
+    // bottom: -50px;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes inview_slide_up {
+  0% {
+    // bottom: -50px;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

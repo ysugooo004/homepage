@@ -1,0 +1,58 @@
+@use "../mixins/mixins" as *;
+@use "../function/variables" as *;
+.footer {
+  background-color: $color-footer-bg;
+  color: $color-white;
+  text-align: center;
+  .footer__nav-list {
+    display: flex;
+    row-gap: 1.5rem; // 1段目と2段目の上下の隙間
+    column-gap: 1.5rem; // 横並びの隙間（少し狭くして右の余白を減らします）
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    border-bottom: 1px solid $color-footer-border;
+    flex-wrap: wrap; // ★1. 折り返しを許可する
+    justify-content: center;
+    @include media(md) {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: nowrap;
+      gap: 3rem;
+      padding-top: 3rem;
+    }
+  }
+
+  // ★3. 4番目の「アクセス」だけ2段目で中央に持ってくるための設定
+  .footer__nav-item {
+    &:nth-child(4) {
+      flex-basis: 100%; // 横幅いっぱいに広げることで強制的に改行させる
+      text-align: center;
+      @include media(md) {
+        flex-basis: auto; // PCでは元のサイズに戻す
+        text-align: left;
+      }
+    }
+  }
+
+  .footer__nav-link {
+    font-size: 1.2rem;
+    @include media(md) {
+      @media (any-hover: hover) {
+        &:hover {
+          transition: opacity 0.3s ease;
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+
+  .footer__copy {
+    font-size: 1.2rem;
+    color: $color-white;
+    padding-block: 1rem 2rem;
+    text-transform: capitalize;
+    @include media(md) {
+      padding-bottom: 3rem;
+    }
+  }
+}
